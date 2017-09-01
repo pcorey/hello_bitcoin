@@ -1,7 +1,7 @@
 defmodule HelloBitcoin do
 
   def bitcoin_rpc(method, params \\ []) do
-    with url <- Application.get_env(:hello_bitcoin, :bitcoin_url, "http://localhost:8332"),
+    with url <- Application.get_env(:hello_bitcoin, :bitcoin_url),
          command <- %{jsonrpc: "1.0", method: method, params: params},
          body <- Poison.encode!(command),
          {:ok, response} <- HTTPoison.post(url, body),
