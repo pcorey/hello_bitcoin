@@ -6,11 +6,13 @@ defmodule Base58Check do
   end
 
   defp checksum(version, data) do
-    << hash :: bytes-size(4), _ :: bits >> = version <> data
+    version <> data
     |> sha256
     |> sha256
-    hash
+    |> split
   end
+
+  defp split(<< hash :: bytes-size(4), _ :: bits >>), do: hash
 
   defp sha256(data), do: :crypto.hash(:sha256, data)
 
