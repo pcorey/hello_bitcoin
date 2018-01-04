@@ -5,7 +5,7 @@ defmodule Base58 do
   def encode(data, hash) when is_binary(data) do
     encode_zeros(data) <> encode(:binary.decode_unsigned(data), hash)
   end
-  def encode(data, hash) when data == 0, do: hash
+  def encode(0, hash), do: hash
   def encode(data, hash) do
     character = <<Enum.at(@alphabet, rem(data, 58))>>
     encode(div(data, 58), character <> hash)
