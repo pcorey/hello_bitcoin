@@ -1,11 +1,11 @@
 defmodule Base58Check do
 
-  def encode(version, data) do
-    version <> data <> checksum(version, data)
+  def encode(data, version) do
+    version <> data <> checksum(data, version)
     |> Base58.encode
   end
 
-  defp checksum(version, data) do
+  defp checksum(data, version) do
     version <> data
     |> sha256
     |> sha256

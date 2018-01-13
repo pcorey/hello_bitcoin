@@ -20,4 +20,5 @@ defmodule Base58 do
     :binary.bin_to_list(data)
     |> Enum.find_index(&(&1 != 0))
   end
+
 end
