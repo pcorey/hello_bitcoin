@@ -32,13 +32,13 @@ defmodule PrivateKey do
     |> Base58Check.encode(version)
   end
 
-  defp valid?(key) when is_binary(key) do
+  def valid?(key) when is_binary(key) do
     key
     |> :binary.decode_unsigned
     |> valid?
   end
-  defp valid?(key) when key > 1 and key < @n, do: true
-  defp valid?(_), do: false
+  def valid?(key) when key > 1 and key < @n, do: true
+  def valid?(_), do: false
 
   defp hash(data, algorithm), do: :crypto.hash(algorithm, data)
 
