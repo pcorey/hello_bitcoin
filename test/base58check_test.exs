@@ -31,7 +31,7 @@ defmodule Base58CheckTest do
            ) == "16UwLL9Risc3QfPqBUvKofHmBQ7wMtjvM"
   end
 
-  property "gives the same results as base58check-encode" do
+  property "gives the same results as `bx base58check-encode`" do
     check all key <- binary(min_length: 1),
               version <- integer(0..255) do
       result = Base58Check.encode(key, <<version>>)
