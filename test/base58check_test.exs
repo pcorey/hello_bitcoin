@@ -33,10 +33,10 @@ defmodule Base58CheckTest do
 
   property "gives the same results as `bx base58check-encode`" do
     check all key <- binary(min_length: 1),
-              version <- integer(0..255) do
+              version <- byte() do
       result = Base58Check.encode(key, <<version>>)
 
-      output =
+      oracle =
         System.cmd("bx", [
           "base58check-encode",
           Base.encode16(key),
@@ -46,7 +46,7 @@ defmodule Base58CheckTest do
         |> elem(0)
         |> String.trim()
 
-      assert result == output
+      assert result == oracle
     end
   end
 end

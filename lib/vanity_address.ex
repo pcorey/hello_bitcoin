@@ -2,7 +2,7 @@ defmodule VanityAddress do
   def stream_private_keys(regex, version \\ <<0x00>>) do
     [fn -> generate_private_key(regex, version) end]
     |> Stream.cycle()
-    |> Task.async_stream(fn f -> f.() end)
+    |> Task.async_stream(fn f -> f.() end, timeout: :infinity)
     |> Stream.map(fn
       {:ok, thing} -> thing
       _ -> nil
